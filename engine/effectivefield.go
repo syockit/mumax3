@@ -12,6 +12,7 @@ func init() { B_eff.init("B_eff", "T", "Effective field", SetEffectiveField) }
 func SetEffectiveField(dst *data.Slice) {
 	B_demag.Set(dst)  // set to B_demag...
 	B_exch.AddTo(dst) // ...then add other terms
+	B_iec.AddTo(dst)
 	B_anis.AddTo(dst)
 	B_ext.AddTo(dst)
 	if !relaxing {
