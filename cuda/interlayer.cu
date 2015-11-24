@@ -39,28 +39,28 @@ addiecexchange(float* __restrict__ Bx, float* __restrict__ By, float* __restrict
 	m_  = make_float3(mx[i_], my[i_], mz[i_]);  // load m
 	j1__ = j1LUT2d[matidx(r0, regions[i_])];
 	j2__ = j2LUT2d[matidx(r0, regions[i_])];
-	B += wx * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+	B += wx * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 
 	// right neighbor
 	i_  = idx(hclampx(ix+1), iy, iz);
 	m_  = make_float3(mx[i_], my[i_], mz[i_]);
 	j1__ = j1LUT2d[matidx(r0, regions[i_])];
 	j2__ = j2LUT2d[matidx(r0, regions[i_])];
-	B += wx * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+	B += wx * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 
 	// back neighbor
 	i_  = idx(ix, lclampy(iy-1), iz);
 	m_  = make_float3(mx[i_], my[i_], mz[i_]);
 	j1__ = j1LUT2d[matidx(r0, regions[i_])];
 	j2__ = j2LUT2d[matidx(r0, regions[i_])];
-	B += wy * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+	B += wy * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 
 	// front neighbor
 	i_  = idx(ix, hclampy(iy+1), iz);
 	m_  = make_float3(mx[i_], my[i_], mz[i_]);
 	j1__ = j1LUT2d[matidx(r0, regions[i_])];
 	j2__ = j2LUT2d[matidx(r0, regions[i_])];
-	B += wy * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+	B += wy * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 
 	// only take vertical derivative for 3D sim
 	if (Nz != 1) {
@@ -69,14 +69,14 @@ addiecexchange(float* __restrict__ Bx, float* __restrict__ By, float* __restrict
 		m_  = make_float3(mx[i_], my[i_], mz[i_]);
 		j1__ = j1LUT2d[matidx(r0, regions[i_])];
 		j2__ = j2LUT2d[matidx(r0, regions[i_])];
-		B += wz * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+		B += wz * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 
 		// top neighbor
 		i_  = idx(ix, iy, hclampz(iz+1));
 		m_  = make_float3(mx[i_], my[i_], mz[i_]);
 		j1__ = j1LUT2d[matidx(r0, regions[i_])];
 		j2__ = j2LUT2d[matidx(r0, regions[i_])];
-		B += wz * 2 * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
+		B += wz * (j1__ + 2 * j2__ * dot(m_, m0)) * m_;
 	}
 
 	Bx[I] = B.x;
